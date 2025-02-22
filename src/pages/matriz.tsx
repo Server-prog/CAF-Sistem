@@ -1,8 +1,54 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FileText } from "lucide-react";
+
+interface Dado {
+  id: number;
+  titulo: string;
+  categoria: number;
+  fase: number;
+  data: string;
+}
 
 const Home: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [image, setImage] = useState<string | null>(null);
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setImage(imageUrl);
+    }
+  };
+
+  const [dados, setDados] = useState<Dado[]>([]);
+  const [editando, setEditando] = useState<number | null>(null);
+  const [novoDado, setNovoDado] = useState<Dado>({ id: 0, titulo: "", categoria: 0, fase: 0, data: "" });
+
+  const handleEdit = (index: number) => {
+    setEditando(index);
+    setNovoDado(dados[index]);
+  };
+
+  const handleDelete = (index: number) => {
+    setDados(dados.filter((_, i) => i !== index));
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNovoDado({ ...novoDado, [name]: value });
+  };
+
+  const handleSave = (index: number) => {
+    const novosDados = [...dados];
+    novosDados[index] = novoDado;
+    setDados(novosDados);
+    setEditando(null);
+  };
+
+
+  
   return (
     <div >
         <header className="flex justify-between items-center p-4 bg-black rounded-lg max-w-[1340px] mx-auto mt-2">
@@ -29,7 +75,7 @@ const Home: React.FC = () => {
                           <p className="text-xs text-gray-300">tjoao7279@gmail.com</p>
                         </div>
                       </div>
-                    </header>
+        </header>
     <section className="flex max-w-[1240px] mx-auto mt-14">
           <h1 className="font-semibold text-xl">Chaves/Matriz(12)</h1>
           <div className="flex gap-7 ml-auto mt-4">
@@ -67,90 +113,70 @@ const Home: React.FC = () => {
           </div>
       </section>
 
-      <div className=" container mx-auto w-[1240px] mt-11">
-        <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-                <thead>
-                    <tr className="bg-pink-100 text-gray-700">
-                        <th className="py-3 px-6 text-left">ID</th>
-                        <th className="py-3 px-6 text-left">Título</th>
-                        <th className="py-3 px-6 text-left">Categoria</th>
-                        <th className="py-3 px-6 text-left">Fase</th>
-                        <th className="py-3 px-6 text-left">Data</th>
-                        <th className="py-3 px-6 text-left">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr className="border-b border-gray-200">
-                        <td className="py-3 px-6">00</td>
-                        <td className="py-3 px-6">Estrutura de Dados</td>
-                        <td className="py-3 px-6">10</td>
-                        <td className="py-3 px-6">20</td>
-                        <td className="py-3 px-6">02/01/2005</td>
-                        <td className="py-3 px-6">
-                          <button className="text-gray-500"><img src="/src/image/escrever.png" alt="img" /></button>
-                          <button className="text-red-500 "><img src="/src/image/delete.png" alt="" /></button>
-                        </td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                        <td className="py-3 px-6">00</td>
-                        <td className="py-3 px-6">Lógica de Programação</td>
-                        <td className="py-3 px-6">10</td>
-                        <td className="py-3 px-6">20</td>
-                        <td className="py-3 px-6">02/01/2005</td>
-                        <td className="py-3 px-6">
-                          <button className="text-gray-500"><img src="/src/image/escrever.png" alt="img" /></button>
-                          <button className="text-red-500 "><img src="/src/image/delete.png" alt="" /></button>
-                        </td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                        <td className="py-3 px-6">00</td>
-                        <td className="py-3 px-6">Laço de Repetição</td>
-                        <td className="py-3 px-6">10</td>
-                        <td className="py-3 px-6">20</td>
-                        <td className="py-3 px-6">02/01/2005</td>
-                        <td className="py-3 px-6">
-                          <button className="text-gray-500"><img src="/src/image/escrever.png" alt="img" /></button>
-                          <button className="text-red-500 "><img src="/src/image/delete.png" alt="" /></button>
-                        </td>
-                    </tr>
-                </tbody>
-                <tr className="border-b border-gray-200">
-                        <td className="py-3 px-6">00</td>
-                        <td className="py-3 px-6">Estrutura de Dados</td>
-                        <td className="py-3 px-6">10</td>
-                        <td className="py-3 px-6">20</td>
-                        <td className="py-3 px-6">02/01/2005</td>
-                        <td className="py-3 px-6">
-                          <button className="text-gray-500"><img src="/src/image/escrever.png" alt="img" /></button>
-                          <button className="text-red-500 "><img src="/src/image/delete.png" alt="" /></button>
-                        </td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                        <td className="py-3 px-6">00</td>
-                        <td className="py-3 px-6">Lógica de Programação</td>
-                        <td className="py-3 px-6">10</td>
-                        <td className="py-3 px-6">20</td>
-                        <td className="py-3 px-6">02/01/2005</td>
-                        <td className="py-3 px-6">
-                          <button className="text-gray-500"><img src="/src/image/escrever.png" alt="img" /></button>
-                          <button className="text-red-500 "><img src="/src/image/delete.png" alt="" /></button>
-                        </td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                        <td className="py-3 px-6">00</td>
-                        <td className="py-3 px-6">Laço de Repetição</td>
-                        <td className="py-3 px-6">10</td>
-                        <td className="py-3 px-6">20</td>
-                        <td className="py-3 px-6">02/01/2005</td>
-                        <td className="py-3 px-6">
-                            <button className="text-gray-500"><img src="/src/image/escrever.png" alt="img" /></button>
-                            <button className="text-red-500 "><img src="/src/image/delete.png" alt="" /></button>
-                        </td>
-                    </tr>
-                
-            </table>
-        </div>
+      <div className="container mx-auto w-[1240px] mt-11">
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+          <thead>
+            <tr className="bg-pink-100 text-gray-700">
+              <th className="py-3 px-6 text-left">ID</th>
+              <th className="py-3 px-6 text-left">Título</th>
+              <th className="py-3 px-6 text-left">Categoria</th>
+              <th className="py-3 px-6 text-left">Fase</th>
+              <th className="py-3 px-6 text-left">Data</th>
+              <th className="py-3 px-6 text-left">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dados.length === 0 ? (
+              <tr>
+                <td colSpan={6} className="py-3 px-6 text-center text-gray-500">
+                  <div className="mt-5">
+                    <div className="flex justify-center mr-5">
+                      <FileText className="w-20 h-20 text-gray-500" />
+                    </div>
+                  <div className="mt-10">
+                    <p>Nenhum dado encontrado. Insira novos dados na tabela.</p>
+                  </div>
+                </div>
+              </td>
+              </tr>
+            ) : (
+              dados.map((item, index) => (
+                <tr key={index} className="border-b border-gray-200">
+                  {editando === index ? (
+                    <>
+                      <td className="py-3 px-6"><input type="text" name="id" value={novoDado.id} className="border p-1" /></td>
+                      <td className="py-3 px-6"><input type="text" name="titulo" value={novoDado.titulo} onChange={handleChange} className="border p-1" /></td>
+                      <td className="py-3 px-6"><input type="number" name="categoria" value={novoDado.categoria} onChange={handleChange} className="border p-1" /></td>
+                      <td className="py-3 px-6"><input type="number" name="fase" value={novoDado.fase} onChange={handleChange} className="border p-1" /></td>
+                      <td className="py-3 px-6"><input type="text" name="data" value={novoDado.data} onChange={handleChange} className="border p-1" /></td>
+                      <td className="py-3 px-6">
+                        <button onClick={() => handleSave(index)} className="text-green-500 mr-2">Salvar</button>
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td className="py-3 px-6">{item.id}</td>
+                      <td className="py-3 px-6">{item.titulo}</td>
+                      <td className="py-3 px-6">{item.categoria}</td>
+                      <td className="py-3 px-6">{item.fase}</td>
+                      <td className="py-3 px-6">{item.data}</td>
+                      <td className="py-3 px-6">
+                        <button onClick={() => handleEdit(index)} className="text-gray-500 mr-2">
+                          <img src="/src/image/escrever.png" alt="Editar" />
+                        </button>
+                        <button onClick={() => handleDelete(index)} className="text-red-500">
+                          <img src="/src/image/delete.png" alt="Deletar" />
+                        </button>
+                      </td>
+                    </>
+                  )}
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
 
     {/* Modal */}
@@ -201,10 +227,23 @@ const Home: React.FC = () => {
         </div>
 
         {/* Upload de Arquivo */}
-        <div className="border-dashed border-2 border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center">
-          <img src="src/components/image/upload-icon.svg" alt="Upload" className="w-10 h-10 mb-2" />
-          <span className="text-gray-500 text-sm">Upload file</span>
-        </div>
+        <div className="border-dashed border-2 border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer relative">
+      <input
+        type="file"
+        accept="image/*"
+        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+        onChange={handleImageChange}
+      />
+      {image ? (
+        <img src={image} alt="Uploaded" className="w-24 h-24 object-cover rounded-lg mb-2" />
+      ) : (
+        <svg className="w-10 h-10 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l4-4m0 0l4 4m-4-4v12M5 12h14" />
+                </svg>
+      )}
+      <span className="text-gray-500 text-sm">{image ? "Imagem carregada" : "Upload file"}</span>
+    </div>
+
 
         {/* Botão de Adicionar */}
         <button className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition">
@@ -213,13 +252,7 @@ const Home: React.FC = () => {
       </form>
     </div>
   </div>
-)}
-
-<footer className="fixed inset-x-0 bottom-0 border-t border-gray-200">
-        <div className=" text-gray-600 text-center py-4 mt-7">
-          <p>&copy; 2021 Easy Meal. Todos os direitos reservados.</p>
-        </div>
-      </footer>
+        )}
     </div>
   );
 }

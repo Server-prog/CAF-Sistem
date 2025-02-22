@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import { ButtonProp } from "../components/autentication-components/button";
 import { HeaderAutentification } from "../components/autentication-components/header";
@@ -18,7 +19,7 @@ export const ForgotPassword: React.FC = () => {
     console.log("Email digitado:", userData.email);
     navigate("/forgot-password", { replace: true });
   };
-
+  
   return (
     <>
       <div>
@@ -28,7 +29,7 @@ export const ForgotPassword: React.FC = () => {
             <p className="font-sans text-3xl font-black text-zinc-950">
               Recuperar senha
             </p>
-            <p className="w-[400px] text-gray-300">
+            <p className="w-[400px] text-gray-500">
               Informe seu email para recuperar a senha, será enviado um email
               com um link para redefinir a senha.
             </p>
@@ -49,7 +50,7 @@ export const ForgotPassword: React.FC = () => {
                 />
               </div>
               <ButtonProp  variant="primary">
-                Continuar
+                 <Link to="/src/pages/emailConfomation.tsx">Continuar</Link> 
                 <StepForward />
               </ButtonProp>
             </form>

@@ -183,7 +183,7 @@ export default function Dashboard() {
               className="border p-2 rounded-lg w-full mb-2"
             />
             <input
-              type="number"
+              type="text"
               placeholder="Nota"
               value={novoAluno.nota}
               onChange={(e) => setNovoAluno({ ...novoAluno, nota: Number(e.target.value) })}
@@ -217,10 +217,10 @@ export default function Dashboard() {
       )}
       {/* Modal */}
       {isModalOn && (
-                  <div className="fixed inset-0 flex justify-end">
-                    {/* Fundo escuro semi-transparente cobrindo toda a tela */}
-                    <div
-                      className="absolute inset-0 bg-black bg-opacity-50"
+        <div className="fixed inset-0 flex justify-end">
+          {/* Fundo escuro semi-transparente cobrindo toda a tela */}
+            <div
+                   className="absolute inset-0 bg-black bg-opacity-50"
                       onClick={() => setIsModalOpen(false)} // Fecha ao clicar no fundo
                     ></div>
 
@@ -237,9 +237,9 @@ export default function Dashboard() {
                       </div>
                       <div className="flex space-x-4 justify-between items-center">
                         <div className="mt-12">
-                          <p>Nome:</p>
-                          <p>Classe:</p>
-                          <p>Categoria:</p>
+                            <input type="text" placeholder="Nome" className="h-6 w-28 border-none hover:no-underline" />
+                            <input type="text" placeholder="Classe" className="h-6 w-28 border-none hover:no-underline" />
+                            <input type="text" placeholder="Categoria" className="h-6 w-28 border-none hover:no-underline" />
                         </div>
                         <div className="mt-20">
                           <p>Curso</p>
@@ -257,15 +257,19 @@ export default function Dashboard() {
                           </div>
                         </div>
                         <div className="mt-10">
-                          <div className="border border-gray-500 p-4 rounded-lg shadow-sm flex items-center justify-center h-60 cursor-pointer">
-                            <img src="public/Upload.png" alt="Download" className="h-12 w-12" />
-                            <p className="ml-2">transferir</p>
-                          </div>
+                          <label htmlFor="fileUpload" className="border border-gray-500 p-4 rounded-lg shadow-sm flex items-center justify-center h-60 cursor-pointer">
+                          <svg className="w-10 h-10 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l4-4m0 0l4 4m-4-4v12M5 12h14" />
+                </svg>
+              <span className="text-gray-500 text-sm">Upload file</span>
+                          </label>
+                          <input type="file" id="fileUpload" className="hidden" />
+  
                           <div className="flex justify-center mt-4">
-                            <button className="bg-pink-500 text-black px-4 py-2 rounded-lg space-x-1 border border-pink-200 shadow-sm w-[402px] h-[100px]:">
-                              <p>Donwload</p>
-                            </button>
-                          </div>
+                            <button className="bg-pink-500 text-black px-4 py-2 rounded-lg border border-pink-200 shadow-sm w-[402px]">
+                            <p>Download</p>
+                          </button>
+                           </div>
                         </div>
                       </div>
                     </div>

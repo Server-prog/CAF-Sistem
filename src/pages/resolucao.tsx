@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FileText } from "lucide-react";
 
 interface DataItem {
     id: number;
@@ -9,9 +10,11 @@ interface DataItem {
     date: string;
   }
 
+
+  
+
 const Resolucao: React.FC = () => {
     const [data, setData] = useState<DataItem[]>([
-        { id: 1, title: "Estrutura de Dados", category: "10", phase: "20", date: "02/01/2005" },
       ]);
     
       const [editingItem, setEditingItem] = useState<DataItem | null>(null);
@@ -127,71 +130,97 @@ const Resolucao: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
-              <tr key={item.id} className="border-b border-gray-200">
-                <td className="py-3 px-6">{item.id}</td>
-                <td className="py-3 px-6">
-                  {editingItem?.id === item.id ? (
-                    <input
-                      type="text"
-                      value={editedValues?.title || ""}
-                      onChange={(e) => setEditedValues((prev) => ({ ...prev!, title: e.target.value }))}
-                      className="border p-1"
-                    />
-                  ) : (
-                    item.title
-                  )}
-                </td>
-                <td className="py-3 px-6">
-                  {editingItem?.id === item.id ? (
-                    <input
-                      type="text"
-                      value={editedValues?.category || ""}
-                      onChange={(e) => setEditedValues((prev) => ({ ...prev!, category: e.target.value }))}
-                      className="border p-1"
-                    />
-                  ) : (
-                    item.category
-                  )}
-                </td>
-                <td className="py-3 px-6">
-                  {editingItem?.id === item.id ? (
-                    <input
-                      type="text"
-                      value={editedValues?.phase || ""}
-                      onChange={(e) => setEditedValues((prev) => ({ ...prev!, phase: e.target.value }))}
-                      className="border p-1"
-                    />
-                  ) : (
-                    item.phase
-                  )}
-                </td>
-                <td className="py-3 px-6">
-                  {editingItem?.id === item.id ? (
-                    <input
-                      type="text"
-                      value={editedValues?.date || ""}
-                      onChange={(e) => setEditedValues((prev) => ({ ...prev!, date: e.target.value }))}
-                      className="border p-1"
-                    />
-                  ) : (
-                    item.date
-                  )}
-                </td>
-                <td className="py-3 px-6">
-                  {editingItem?.id === item.id ? (
-                    <button onClick={handleSave} className="text-green-500 mr-2">Salvar</button>
-                  ) : (
-                    <button onClick={() => handleEdit(item)} className="text-gray-500 mr-2">
-                      <img src="/src/image/escrever.png" alt="Editar" />
-                    </button>
-                  )}
-                  <button onClick={() => handleDelete(item.id)} className="text-red-500">
-                    <img src="/src/image/delete.png" alt="Deletar" />
-                  </button>
-                </td>
-              </tr>
-            ))}
+          {data.length === 0 ? (
+  <tr>
+    <td colSpan="6" className="py-4 text-center text-gray-500">
+      <div className="mt-5">
+        <div className="flex justify-center mr-5">
+          <FileText className="w-20 h-20 text-gray-500" />
+        </div>
+        <div className="mt-10">
+          <p>Nenhum dado encontrado. Insira novos dados na tabela.</p>
+        </div>
+      </div>
+    </td>
+  </tr>
+) : (
+  data.map((item) => (
+    <tr key={item.id} className="border-b border-gray-200">
+      <td className="py-3 px-6">{item.id}</td>
+      <td className="py-3 px-6">
+        {editingItem?.id === item.id ? (
+          <input
+            type="text"
+            defaultValue={editedValues?.title || item.title}
+            onChange={(e) =>
+              setEditedValues((prev) => ({ ...prev!, title: e.target.value }))
+            }
+            className="border p-1"
+          />
+        ) : (
+          item.title
+        )}
+      </td>
+      <td className="py-3 px-6">
+        {editingItem?.id === item.id ? (
+          <input
+            type="text"
+            defaultValue={editedValues?.category || item.category}
+            onChange={(e) =>
+              setEditedValues((prev) => ({ ...prev!, category: e.target.value }))
+            }
+            className="border p-1"
+          />
+        ) : (
+          item.category
+        )}
+      </td>
+      <td className="py-3 px-6">
+        {editingItem?.id === item.id ? (
+          <input
+            type="text"
+            defaultValue={editedValues?.phase || item.phase}
+            onChange={(e) =>
+              setEditedValues((prev) => ({ ...prev!, phase: e.target.value }))
+            }
+            className="border p-1"
+          />
+        ) : (
+          item.phase
+        )}
+      </td>
+      <td className="py-3 px-6">
+        {editingItem?.id === item.id ? (
+          <input
+            type="text"
+            defaultValue={editedValues?.date || item.date}
+            onChange={(e) =>
+              setEditedValues((prev) => ({ ...prev!, date: e.target.value }))
+            }
+            className="border p-1"
+          />
+        ) : (
+          item.date
+        )}
+      </td>
+      <td className="py-3 px-6 flex gap-2">
+        {editingItem?.id === item.id ? (
+          <button onClick={handleSave} className="text-green-500">
+            Salvar
+          </button>
+        ) : (
+          <button onClick={() => handleEdit(item)} className="text-gray-500">
+            <img src="src/image/escrever.png" alt="Editar" className="w-5 h-5" />
+          </button>
+        )}
+        <button onClick={() => handleDelete(item.id)} className="text-red-500">
+          <img src="src/image/delete.png" alt="Deletar" className="w-5 h-5" />
+        </button>
+      </td>
+    </tr>
+  ))
+)}
+
           </tbody>
         </table>
       </div>
@@ -229,13 +258,17 @@ const Resolucao: React.FC = () => {
             className="border p-2 w-full mb-3 rounded"
           />
       
-          <div className="border-dashed border-2 border-gray-300 p-6 flex flex-col items-center justify-center mb-4 rounded">
-            <svg className="w-10 h-10 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l4-4m0 0l4 4m-4-4v12M5 12h14" />
-            </svg>
-            <span className="text-gray-500 text-sm">Upload file</span>
+           <div className="border-dashed border-2 border-gray-300 p-6 flex flex-col items-center justify-center mb-4 rounded cursor-pointer relative">
+              <input 
+                type="file" 
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+                    onChange={(e) => console.log(e.target.files)} 
+                     />
+                <svg className="w-10 h-10 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l4-4m0 0l4 4m-4-4v12M5 12h14" />
+                </svg>
+              <span className="text-gray-500 text-sm">Upload file</span>
             </div>
-      
           <button
             onClick={handleAdd}
             className="bg-red-500 text-white px-4 py-2 rounded w-full"
@@ -247,11 +280,6 @@ const Resolucao: React.FC = () => {
       
       )}
 
-    <footer className="fixed inset-x-0 bottom-0">
-        <div className=" text-gray-600 text-center py-4 mt-7">
-          <p>&copy; 2021 Easy Meal. Todos os direitos reservados.</p>
-        </div>
-      </footer>
     </div>
   );
 };
