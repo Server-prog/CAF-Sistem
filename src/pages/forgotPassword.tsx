@@ -1,25 +1,24 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
+import { useForgot } from "../service/authentication/useForgot";
+import { Mail, StepForward } from "lucide-react";
 import { ButtonProp } from "../components/autentication-components/button";
 import { HeaderAutentification } from "../components/autentication-components/header";
-import { Mail, StepForward } from "lucide-react";
 
 export const ForgotPassword: React.FC = () => {
-  const [userData, setUserData] = useState({ email: "" });
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const { mutate: forgot, isPending } = useForgot();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target; // Correção aqui
-    setUserData({ ...userData, [name]: value });
+    setEmail(e.target.value);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Correção aqui
-    console.log("Email digitado:", userData.email);
-    navigate("/forgot-password", { replace: true });
+    e.preventDefault();
+    forgot(email); // Chama a API de recuperação de senha
   };
-  
+
   return (
     <>
       <div>
@@ -30,27 +29,26 @@ export const ForgotPassword: React.FC = () => {
               Recuperar senha
             </p>
             <p className="w-[400px] text-gray-500">
-              Informe seu email para recuperar a senha, será enviado um email
-              com um link para redefinir a senha.
+              Informe seu e-mail para recuperar a senha. Um link será enviado para redefinir sua senha.
             </p>
           </div>
           <div className="flex flex-col gap-4 mt-7 w-[398px]">
-            <p className="font-normal text-sm">Seu email</p>
+            <p className="font-normal text-sm">Seu e-mail</p>
             <form onSubmit={handleSubmit} className="flex flex-col gap-7">
               <div className="flex gap-2 items-center border px-2 h-12 rounded-lg">
                 <Mail className="text-gray-300" />
                 <input
                   type="email"
-                  name="email" // Correção aqui
+                  name="email"
                   className="flex-1 text-xs h-full text-gray-400 font-sans border-none outline-none focus:ring-0"
-                  value={userData.email}
+                  value={email}
                   onChange={handleInputChange}
-                  placeholder="Digite o seu email"
+                  placeholder="Digite o seu e-mail"
                   required
                 />
               </div>
-              <ButtonProp  variant="primary">
-                 <Link to="/src/pages/emailConfomation.tsx">Continuar</Link> 
+              <ButtonProp variant="primary" type="submit" disabled={isPending}>
+                {isPending ? "Enviando..." : "Enviar"}
                 <StepForward />
               </ButtonProp>
             </form>

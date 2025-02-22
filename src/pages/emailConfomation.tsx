@@ -7,8 +7,6 @@ import {Send} from 'lucide-react'
 export const EmailConfirmation : React.FC = () =>  {
 
 
-
-
     return (
         <>
         <HeaderAutentification/>
