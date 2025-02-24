@@ -78,7 +78,7 @@ const Resolucao: React.FC = () => {
   <summary className="bg-pink-100 text-black px-4 py-2 rounded-lg flex items-center space-x-1 border border-pink-200 shadow-sm cursor-pointer">
     <span>Categoria</span>
     <span>
-    <img src="/src/image/ceta.svg" alt="" />
+    <img src="/src/image/ceta.svg" alt="img" />
     </span>
   </summary>
   <div className="absolute mt-2 bg-white border border-gray-300 shadow-lg rounded-lg p-2 w-full">
@@ -92,7 +92,7 @@ const Resolucao: React.FC = () => {
   <summary className="bg-pink-100 text-black px-4 py-2 rounded-lg flex items-center space-x-1 border border-pink-200 shadow-sm cursor-pointer">
     <span>Fase</span>
     <span>
-      <img src="/src/image/ceta.svg" alt="" />
+      <img src="/src/image/ceta.svg" alt="img" />
     </span>
   </summary>
   <div className="absolute mt-2 bg-white border border-gray-300 shadow-lg rounded-lg p-2 w-full">
@@ -132,7 +132,7 @@ const Resolucao: React.FC = () => {
           <tbody>
           {data.length === 0 ? (
   <tr>
-    <td colSpan="6" className="py-4 text-center text-gray-500">
+    <td colSpan={6} className="py-4 text-center text-gray-500">
       <div className="mt-5">
         <div className="flex justify-center mr-5">
           <FileText className="w-20 h-20 text-gray-500" />
@@ -183,7 +183,7 @@ const Resolucao: React.FC = () => {
             onChange={(e) =>
               setEditedValues((prev) => ({ ...prev!, phase: e.target.value }))
             }
-            className="border p-1"
+            className="border p-1 w-20"
           />
         ) : (
           item.phase
@@ -233,14 +233,6 @@ const Resolucao: React.FC = () => {
             <h2 className="text-xl font-bold">Registrar Matriz</h2>
             <button onClick={() => setShowModal(false)} className="text-gray-500 hover:text-gray-700">×</button>
           </div>
-      
-          <input
-            type="text"
-            placeholder="Informe o título"
-            value={newItem.title}
-            onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
-            className="border p-2 w-full mb-3 rounded"
-          />
       
           <input
             type="text"

@@ -1,14 +1,16 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema, LoginInput } from "../types/auth";
 import { HeaderAutentification } from "../components/autentication-components/header";
 import { Lock, Mail } from "lucide-react";
 import { ButtonProp } from "../components/autentication-components/button";
-import { Link } from "react-router-dom";
 import { useLogin } from "../service/authentication/useAuth";
 
 export const SignIn: React.FC = () => {
+
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -90,9 +92,9 @@ export const SignIn: React.FC = () => {
             <p className="text-zinc-400 text-base font-normal">
               Esqueceu sua senha?
             </p>
-            <Link to="/forgot-password" className="text-rose-600 text-base font-bold">
+            <button onClick={() => navigate("/forgot-password")} className="text-rose-600 text-base font-bold">
               Recuperar senha
-            </Link>
+            </button>
           </div>
         </div>
       </section>

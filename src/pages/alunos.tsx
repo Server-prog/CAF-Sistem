@@ -4,13 +4,9 @@ import { Link } from "react-router-dom";
 const Alunos: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
   const [tableData, setTableData] = useState([
-    { id: 1, nome: "Estrutura de Dados", classe: "01", curso: "Informática" },
-    { id: 2, nome: "Lógica de Programação", classe: "10", curso: "Telecomunicações" },
-    { id: 3, nome: "Laço de Repetição", classe: "10", curso: "Informática" },
-    { id: 4, nome: "Estrutura Condicional", classe: "10", curso: "Telecomunicações" },
-    { id: 5, nome: "Algoritmo", classe: "10", curso: "Informática" },
-    { id: 6, nome: "Promises/Await", classe: "10", curso: "Telecomunicações" },
-    { id: 7, nome: "Métodos de Arrays", classe: "10", curso: "Informática" },
+    { id: 1, nome: "João Tmabue", classe: "10º classe", curso: "Informática" },
+    { id: 2, nome: "João Tambue", classe: "10º classe", curso: "Telecomunicações" },
+    { id: 3, nome: "João Tambue", classe: "10º classe", curso: "Informática" },
   ]);
   const [newEntry, setNewEntry] = useState({ nome: "", classe: "", curso: "" });
 
@@ -136,12 +132,6 @@ const Alunos: React.FC = () => {
           </div>
         </div>
       )}
-
-    <footer className="fixed inset-x-0 bottom-0">
-        <div className=" text-gray-600 text-center py-4 mt-7">
-          <p>&copy; 2021 Easy Meal. Todos os direitos reservados.</p>
-        </div>
-      </footer>
 
     </div>
     

@@ -11,6 +11,8 @@ interface Aluno {
 }
 
 export default function Dashboard() {
+
+
   const [isModalOn, setIsModalOn] = useState(false);
   const [alunos, setAlunos] = useState<Aluno[]>([
     { id: 1, nome: "João Tambue", classe: "10", nota: 17.5 , categoria: "Matemática", fase: "1º fase" }
@@ -42,7 +44,9 @@ export default function Dashboard() {
 
 <header className="flex justify-between items-center p-4 bg-black rounded-lg max-w-[1340px] mx-auto mt-2">
       <div className="flex items-center space-x-3">
-        <img src="/src/image/Easy Meal Logo.png" alt="Logo" className="w-6 h-6" />
+        <button>
+          <img src="/src/image/Easy Meal Logo.png" alt="Logo" className="w-6 h-6" />
+        </button>
         <div>
           <h1 className="text-sm font-semibold text-gray-50">Acessement AI</h1>
           <p className="text-xs text-gray-500">Sistema escolar CAF</p>
@@ -133,7 +137,6 @@ export default function Dashboard() {
       {/* Resoluções */}
       <h2 className="text-xl font-bold mt-6">Resoluções ({alunos.length})</h2>
 
-      {/* Tabela */}
       <div className="mt-4">
         <table className="w-full border rounded-lg shadow-md">
           <thead>
