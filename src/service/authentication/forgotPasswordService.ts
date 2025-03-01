@@ -11,6 +11,6 @@ export const forgotPasswordService = async (email: string) => {
     throw new Error("Erro ao solicitar recuperação de senha.");
   }
 
-  return await response.json(); // A API pode retornar um objeto com status ou mensagem
+  return await response.json();
 };
   

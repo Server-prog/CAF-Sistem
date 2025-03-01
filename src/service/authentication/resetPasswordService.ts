@@ -11,5 +11,5 @@ export const resetPasswordService = async (token: string, newPassword: string) =
       throw new Error("Erro ao redefinir a senha.");
     }
   
-    return await response.json(); // Retorna a mensagem da API
+    return await response.json(); 
   };  
