@@ -6,7 +6,6 @@ import { App } from './app';
 
 const queryClient = new QueryClient();
 
-// Use createRoot corretamente
 const rootElement = document.getElementById('root');
 if (rootElement) {
   const root = createRoot(rootElement);

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForgot } from "../service/authentication/useForgot";
 import { Mail, StepForward } from "lucide-react";
 import { ButtonProp } from "../components/autentication-components/button";
@@ -7,7 +6,6 @@ import { HeaderAutentification } from "../components/autentication-components/he
 
 export const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState("");
-  const navigate = useNavigate();
   const { mutate: forgot, isPending } = useForgot();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +14,7 @@ export const ForgotPassword: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    forgot(email); // Chama a API de recuperação de senha
+    forgot(email); 
   };
 
   return (

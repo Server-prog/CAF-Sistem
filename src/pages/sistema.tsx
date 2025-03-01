@@ -133,8 +133,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-
-      {/* Resoluções */}
       <h2 className="text-xl font-bold mt-6">Resoluções ({alunos.length})</h2>
 
       <div className="mt-4">
@@ -166,7 +164,7 @@ export default function Dashboard() {
         </table>
       </div>
 
-      {/* Modal de Adição */}
+      {/* Modal 1 */}
       {isModalOpen && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-[400px]">
@@ -218,28 +216,25 @@ export default function Dashboard() {
         </div>
       
       )}
-      {/* Modal */}
+      {/* Modal 2 */}
       {isModalOn && (
         <div className="fixed inset-0 flex justify-end">
-          {/* Fundo escuro semi-transparente cobrindo toda a tela */}
             <div
-                   className="absolute inset-0 bg-black bg-opacity-50"
-                      onClick={() => setIsModalOpen(false)} // Fecha ao clicar no fundo
-                    ></div>
-
-                    {/* Conteúdo do modal (lado esquerdo da tela) */}
-                    <div className="relative bg-white w-[445px] h-full shadow-lg p-6">
-                      <div className="flex justify-between items-center">
-                        <button
-                          onClick={() => setIsModalOn(false)}
-                          className="px-4 py-2"
-                        >
-                          <img src="src/image/icone de x.svg" alt="Fechar" className="h-6 w-6" />
-                        </button>
-                        <h1>200</h1>
-                      </div>
-                      <div className="flex space-x-4 justify-between items-center">
-                        <div className="mt-12">
+                className="absolute inset-0 bg-black bg-opacity-50"
+                onClick={() => setIsModalOpen(false)}
+                ></div>
+                <div className="relative bg-white w-[445px] h-full shadow-lg p-6">
+                    <div className="flex justify-between items-center">
+                       <button
+                        onClick={() => setIsModalOn(false)}
+                        className="px-4 py-2"
+                      >
+                        <img src="src/image/icone de x.svg" alt="Fechar" className="h-6 w-6" />
+                      </button>
+                      <h1>200</h1>
+                  </div>                      
+                  <div className="flex space-x-4 justify-between items-center">
+                      <div className="mt-12">
                             <input type="text" placeholder="Nome" className="h-6 w-28 border-none hover:no-underline" />
                             <input type="text" placeholder="Classe" className="h-6 w-28 border-none hover:no-underline" />
                             <input type="text" placeholder="Categoria" className="h-6 w-28 border-none hover:no-underline" />

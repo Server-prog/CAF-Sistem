@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useResetPassword } from "../service/authentication/useResetPassword";
 import { Lock, Unlock } from "lucide-react";
 import { ButtonProp } from "../components/autentication-components/button";
 
 export const ResetPassword: React.FC = () => {
   const [newPassword, setNewPassword] = useState("");
-  const { token } = useParams(); // Obtém o token da URL
-  const navigate = useNavigate();
+  const { token } = useParams(); 
   const { mutate: resetPassword, isPending } = useResetPassword();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

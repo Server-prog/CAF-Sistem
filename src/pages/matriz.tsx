@@ -221,7 +221,6 @@ const Matriz: React.FC = () => {
         </table>
       </div>
 
-      {/* Modal para adicionar novo item */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
         <div className="bg-white p-6 rounded-lg shadow-lg w-96">

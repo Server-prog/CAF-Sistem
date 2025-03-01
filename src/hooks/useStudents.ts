@@ -7,7 +7,6 @@ interface Student {
   Curso: string;
 }
 
-// hook para buscar e armazenar os estudantes
 export const useStudents = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
